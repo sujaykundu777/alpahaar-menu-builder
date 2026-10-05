@@ -1,0 +1,4073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Alpahaar Foods - Weekend Menu Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Warm Artisanal Culinary Design System */
+      --bg: #fffdf9;
+      --surface: #fbf8fc;
+      --fg: #9b2f00;
+      --muted: #904d00;
+      --border: #8d7168;
+      --accent: #00622a;
+      --accent-secondary: #fe932c;
+
+      /* Extended palette for this prototype */
+      --terracotta: #c2410c;
+      --saffron: #fed7aa;
+      --whatsapp-green: #22c55e;
+      --whatsapp-bubble: #dcf8c6;
+
+      /* Typography */
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+      /* Spacing */
+      --spacing-unit: 1.25rem;
+      --radius: 0.25rem;
+      --radius-2xl: 1rem;
+
+      /* Touch targets for seniors */
+      --touch-min: 44px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      max-width: 390px;
+      margin: 0 auto;
+      padding-bottom: 140px;
+    }
+
+    /* Header */
+    header {
+      background: var(--surface);
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      flex: 1;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: var(--surface);
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--saffron), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--fg);
+      font-size: 16px;
+    }
+
+    /* Main Content */
+    main {
+      padding: 1.25rem;
+    }
+
+    .greeting {
+      margin-bottom: 1.25rem;
+    }
+
+    .greeting-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .greeting-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .batch-badge {
+      background: var(--accent);
+      color: white;
+      padding: 0.25rem 0.625rem;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    /* Logistics */
+    .logistics-grid {
+      display: grid;
+      gap: 0.875rem;
+    }
+
+    .logistics-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .logistics-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius);
+      background: var(--saffron);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+
+    .logistics-content {
+      flex: 1;
+    }
+
+    .logistics-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .logistics-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-top: 0.125rem;
+    }
+
+    .logistics-hindi {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    /* Snack Items */
+    .snack-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .snack-item {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0.875rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .snack-item:hover {
+      border-color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.02);
+    }
+
+    .snack-item.selected {
+      border-color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.05);
+    }
+
+    .checkbox {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .snack-item.selected .checkbox {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    .checkmark {
+      display: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .snack-item.selected .checkmark {
+      display: block;
+    }
+
+    .snack-content {
+      flex: 1;
+    }
+
+    .snack-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .snack-name-hindi {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .party-offer-badge {
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      background: var(--accent);
+      color: white;
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .snack-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--terracotta);
+      flex-shrink: 0;
+    }
+
+    .snack-price-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    /* Mithai Items */
+    .mithai-list {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .mithai-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .mithai-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .mithai-name-hindi {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .mithai-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+
+    .add-custom-btn {
+      width: 100%;
+      height: 52px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .add-custom-btn:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.02);
+    }
+
+    /* Tone Selector */
+    .tone-selector {
+      display: grid;
+      gap: 0.625rem;
+    }
+
+    .tone-option {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0.875rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tone-option:hover {
+      border-color: var(--whatsapp-green);
+      background: rgba(34, 197, 94, 0.02);
+    }
+
+    .tone-option.selected {
+      border-color: var(--whatsapp-green);
+      background: rgba(34, 197, 94, 0.05);
+    }
+
+    .radio {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .tone-option.selected .radio {
+      border-color: var(--whatsapp-green);
+    }
+
+    .radio-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--whatsapp-green);
+      display: none;
+    }
+
+    .tone-option.selected .radio-dot {
+      display: block;
+    }
+
+    .tone-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .tone-label-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .recommended-badge {
+      margin-left: auto;
+      background: var(--saffron);
+      color: var(--terracotta);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Voice Player */
+    .voice-player {
+      background: linear-gradient(135deg, rgba(254, 215, 170, 0.2), rgba(254, 147, 44, 0.1));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .player-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.875rem;
+    }
+
+    .player-info {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      border: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 18px;
+    }
+
+    .play-btn:hover {
+      background: var(--fg);
+      transform: scale(1.05);
+    }
+
+    .voice-info {
+      flex: 1;
+    }
+
+    .voice-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .voice-duration {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .speed-toggle {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.375rem 0.625rem;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .speed-toggle:hover {
+      background: var(--surface);
+    }
+
+    .waveform {
+      height: 40px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--terracotta) 0px,
+        var(--terracotta) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .waveform-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 57%;
+      height: 100%;
+      background: var(--whatsapp-green);
+      opacity: 0.3;
+      transition: width 0.3s;
+    }
+
+    /* WhatsApp Bubble */
+    .whatsapp-preview {
+      background: var(--whatsapp-bubble);
+      border-radius: var(--radius-2xl);
+      padding: 1rem;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #000;
+      position: relative;
+      margin-top: 0.875rem;
+    }
+
+    .whatsapp-preview::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -8px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid var(--whatsapp-bubble);
+      border-bottom: 10px solid transparent;
+    }
+
+    .whatsapp-text {
+      white-space: pre-wrap;
+    }
+
+    .whatsapp-time {
+      font-size: 11px;
+      color: #667781;
+      text-align: right;
+      margin-top: 0.5rem;
+    }
+
+    /* Floating CTA */
+    .floating-cta {
+      position: fixed;
+      bottom: 72px;
+      left: 0;
+      right: 0;
+      max-width: 390px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      z-index: 90;
+    }
+
+    .cta-btn {
+      width: 100%;
+      height: 56px;
+      background: var(--whatsapp-green);
+      border: none;
+      border-radius: var(--radius-2xl);
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .cta-btn:hover {
+      background: #1ea651;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 390px;
+      margin: 0 auto;
+      height: 72px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 100;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      min-height: var(--touch-min);
+    }
+
+    .nav-item:hover {
+      background: rgba(194, 65, 12, 0.05);
+    }
+
+    .nav-item.active {
+      color: var(--terracotta);
+    }
+
+    .nav-icon {
+      font-size: 20px;
+    }
+
+    .nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+
+    .nav-item.active .nav-label {
+      color: var(--terracotta);
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Preview Tab Styles */
+    .preview-header {
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .preview-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Message Preview Card */
+    .message-preview-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .message-preview-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .whatsapp-bubble-large {
+      background: var(--whatsapp-bubble);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #000;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .whatsapp-bubble-large::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -8px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid var(--whatsapp-bubble);
+      border-bottom: 10px solid transparent;
+    }
+
+    /* Action Buttons */
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      height: 52px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .action-btn:hover {
+      border-color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.02);
+    }
+
+    .action-btn.primary {
+      background: var(--whatsapp-green);
+      border-color: var(--whatsapp-green);
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background: #1ea651;
+      border-color: #1ea651;
+    }
+
+    /* Share Options Card */
+    .share-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .share-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .share-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    .share-options {
+      display: grid;
+      gap: 0.625rem;
+    }
+
+    .share-option {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0.875rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg);
+    }
+
+    .share-option:hover {
+      border-color: var(--whatsapp-green);
+      background: rgba(34, 197, 94, 0.02);
+      transform: translateX(2px);
+    }
+
+    .share-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+
+    .share-icon.whatsapp {
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .share-icon.telegram {
+      background: rgba(0, 136, 204, 0.1);
+    }
+
+    .share-icon.sms {
+      background: rgba(0, 98, 42, 0.1);
+    }
+
+    .share-icon.clipboard {
+      background: rgba(254, 147, 44, 0.1);
+    }
+
+    .share-content {
+      flex: 1;
+    }
+
+    .share-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .share-description {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .share-arrow {
+      color: var(--border);
+      font-size: 20px;
+    }
+
+    /* Stats Card */
+    .stats-card {
+      background: linear-gradient(135deg, rgba(254, 215, 170, 0.2), rgba(254, 147, 44, 0.1));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    .stat-label-hindi {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    /* History List */
+    .history-list {
+      display: grid;
+      gap: 0.625rem;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .history-date {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius);
+      background: var(--saffron);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .history-day {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--terracotta);
+      line-height: 1;
+    }
+
+    .history-month {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-top: 0.125rem;
+    }
+
+    .history-content {
+      flex: 1;
+    }
+
+    .history-batch {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .history-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .history-status {
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+    .history-status.sent {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--whatsapp-green);
+    }
+
+    /* Prices Tab Styles */
+    .prices-header {
+      margin-bottom: 1.25rem;
+    }
+
+    .status-badges {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.875rem;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      padding: 0.375rem 0.75rem;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .status-badge.master-list {
+      background: var(--saffron);
+      color: var(--terracotta);
+    }
+
+    .status-badge.synced {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--whatsapp-green);
+    }
+
+    .prices-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .prices-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 0.625rem;
+    }
+
+    .prices-description {
+      font-size: 14px;
+      color: var(--fg);
+      line-height: 1.5;
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.625rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .kpi-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1rem 0.75rem;
+      text-align: center;
+    }
+
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.375rem;
+    }
+
+    .kpi-label {
+      font-size: 13px;
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    .kpi-label-hindi {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    /* Add New Button */
+    .add-new-btn {
+      width: 100%;
+      height: 52px;
+      background: var(--terracotta);
+      border: none;
+      border-radius: var(--radius-2xl);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .add-new-btn:hover {
+      background: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    /* Filter Pills */
+    .filter-pills {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .filter-pills::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .filter-pills::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .filter-pill {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .filter-pill.active {
+      background: var(--terracotta);
+      color: white;
+    }
+
+    .filter-pill:not(.active) {
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    .filter-pill:not(.active):hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    /* Dish Cards */
+    .dish-list {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .dish-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1rem;
+    }
+
+    .dish-card.inactive {
+      opacity: 0.65;
+    }
+
+    .dish-header {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .dish-image {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-2xl);
+      background: linear-gradient(135deg, var(--saffron), var(--accent-secondary));
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .dish-card.inactive .dish-image {
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+
+    .dish-header-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .dish-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.375rem;
+      flex-wrap: wrap;
+    }
+
+    .category-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .category-badge.hot-snack {
+      background: rgba(234, 88, 12, 0.1);
+      color: var(--terracotta);
+    }
+
+    .category-badge.namkeen {
+      background: rgba(254, 147, 44, 0.1);
+      color: var(--accent-secondary);
+    }
+
+    .category-badge.mithai {
+      background: rgba(0, 98, 42, 0.1);
+      color: var(--accent);
+    }
+
+    .category-badge.paused {
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    .active-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 11px;
+      color: var(--whatsapp-green);
+      font-weight: 600;
+    }
+
+    .active-indicator.inactive {
+      color: var(--muted);
+    }
+
+    .active-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--whatsapp-green);
+    }
+
+    .active-indicator.inactive .active-dot {
+      background: var(--muted);
+    }
+
+    .dish-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 0.25rem;
+    }
+
+    .dish-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .dish-toggle {
+      margin-left: auto;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .toggle-switch.on {
+      background: var(--whatsapp-green);
+      border-color: var(--whatsapp-green);
+    }
+
+    .toggle-knob {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle-switch.on .toggle-knob {
+      transform: translateX(20px);
+    }
+
+    /* Pricing Box */
+    .pricing-box {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 0.875rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .pricing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .pricing-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .pricing-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.01em;
+    }
+
+    .pricing-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .party-offer-box {
+      background: var(--saffron);
+      border: 1px solid var(--accent-secondary);
+      border-radius: var(--radius);
+      padding: 0.625rem 0.875rem;
+      margin-top: 0.625rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .party-offer-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+      flex: 1;
+    }
+
+    /* Dish Actions */
+    .dish-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.625rem;
+    }
+
+    .dish-action-btn {
+      height: 44px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+    }
+
+    .dish-action-btn.edit {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      color: var(--fg);
+    }
+
+    .dish-action-btn.edit:hover {
+      border-color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.02);
+    }
+
+    .dish-action-btn.delete {
+      background: #fee2e2;
+      border: 2px solid #fecaca;
+      color: #dc2626;
+    }
+
+    .dish-action-btn.delete:hover {
+      background: #fecaca;
+    }
+
+    /* Tip Card */
+    .tip-card {
+      background: #fff7ed;
+      border: 1px solid var(--saffron);
+      border-radius: var(--radius-2xl);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.625rem;
+    }
+
+    .tip-icon {
+      font-size: 20px;
+    }
+
+    .tip-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #9a3412;
+    }
+
+    .tip-text {
+      font-size: 14px;
+      color: #9a3412;
+      line-height: 1.5;
+    }
+
+    /* Settings Tab Styles */
+    .settings-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .settings-icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(194, 65, 12, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 24px;
+      color: var(--terracotta);
+    }
+
+    .settings-banner-content {
+      flex: 1;
+    }
+
+    .settings-banner-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .settings-banner-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .settings-badge {
+      background: var(--saffron);
+      color: var(--terracotta);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .settings-banner-desc {
+      font-size: 14px;
+      color: var(--fg);
+      line-height: 1.5;
+      margin-bottom: 0.375rem;
+    }
+
+    .settings-banner-hindi {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      flex: 1;
+    }
+
+    .section-icon {
+      font-size: 20px;
+      color: var(--terracotta);
+    }
+
+    .section-title-group {
+      flex: 1;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    .connected-badge {
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .connected-badge.success {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .connected-badge.ready {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    /* Input Fields */
+    .input-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .input-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-field {
+      width: 100%;
+      height: 48px;
+      padding: 0 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-family: var(--font-body);
+      color: var(--fg);
+      background: var(--bg);
+      transition: all 0.2s;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--terracotta);
+    }
+
+    .input-field[type="password"] {
+      letter-spacing: 0.2em;
+    }
+
+    .eye-toggle {
+      position: absolute;
+      right: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .eye-toggle:hover {
+      color: var(--fg);
+    }
+
+    .validated-status {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 12px;
+      font-weight: 600;
+      color: #16a34a;
+    }
+
+    /* Voice Options */
+    .voice-options {
+      display: grid;
+      gap: 0.625rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .voice-option-header {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+    }
+
+    .voice-option {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0.875rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .voice-option.selected {
+      background: #fff7ed;
+      border-color: var(--terracotta);
+    }
+
+    .voice-radio {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .voice-option.selected .voice-radio {
+      border-color: var(--terracotta);
+    }
+
+    .voice-radio-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      display: none;
+    }
+
+    .voice-option.selected .voice-radio-dot {
+      display: block;
+    }
+
+    .voice-content {
+      flex: 1;
+    }
+
+    .voice-name-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .voice-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .voice-recommended {
+      background: var(--saffron);
+      color: var(--terracotta);
+      padding: 0.125rem 0.375rem;
+      border-radius: var(--radius);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .voice-special-badge {
+      background: var(--accent);
+      color: white;
+      padding: 0.125rem 0.375rem;
+      border-radius: var(--radius);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .voice-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .voice-icon {
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    /* Sample Preview Box */
+    .sample-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .sample-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .sample-preview-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .ready-status {
+      font-size: 12px;
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    .test-button {
+      width: 100%;
+      height: 48px;
+      background: var(--terracotta);
+      border: none;
+      border-radius: var(--radius);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .test-button:hover {
+      background: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    .sample-quote {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* Speed Slider */
+    .speed-slider-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .speed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .speed-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .speed-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+
+    .slider-container {
+      margin-bottom: 0.5rem;
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--surface);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      cursor: pointer;
+      border: 3px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      cursor: pointer;
+      border: 3px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .speed-markers {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .speed-marker {
+      text-align: center;
+      flex: 1;
+    }
+
+    /* Model Provider Cards */
+    .model-providers {
+      display: grid;
+      gap: 0.625rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .model-card {
+      padding: 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .model-card.selected {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: white;
+    }
+
+    .model-card:not(.selected) {
+      background: var(--surface);
+    }
+
+    .model-card:not(.selected):hover {
+      border-color: var(--terracotta);
+    }
+
+    .model-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+
+    .model-card:not(.selected) .model-icon {
+      background: var(--bg);
+    }
+
+    .model-content {
+      flex: 1;
+    }
+
+    .model-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .model-card.selected .model-name {
+      color: white;
+    }
+
+    .model-card:not(.selected) .model-name {
+      color: var(--fg);
+    }
+
+    .model-desc {
+      font-size: 13px;
+    }
+
+    .model-card.selected .model-desc {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .model-card:not(.selected) .model-desc {
+      color: var(--muted);
+    }
+
+    .model-checkmark {
+      font-size: 20px;
+    }
+
+    /* Dropdown */
+    .select-field {
+      width: 100%;
+      height: 48px;
+      padding: 0 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-family: var(--font-body);
+      color: var(--fg);
+      background: var(--bg);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .select-field:focus {
+      outline: none;
+      border-color: var(--terracotta);
+    }
+
+    /* Save Button */
+    .save-button {
+      width: 100%;
+      height: 52px;
+      background: var(--terracotta);
+      border: none;
+      border-radius: var(--radius-2xl);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .save-button:hover {
+      background: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    /* Security Note */
+    .security-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .security-icon {
+      font-size: 20px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .security-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-container {
+      background: var(--bg);
+      border-radius: var(--radius-2xl);
+      max-width: 390px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      background: var(--surface);
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .modal-title-group {
+      flex: 1;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--surface);
+    }
+
+    .modal-body {
+      padding: 1.25rem;
+    }
+
+    .form-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    /* Category Pills */
+    .category-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-pill {
+      padding: 0.75rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg);
+    }
+
+    .category-pill.selected {
+      border-color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.1);
+      color: var(--terracotta);
+    }
+
+    .category-pill:not(.selected):hover {
+      border-color: var(--terracotta);
+    }
+
+    .category-pill-name {
+      font-size: 14px;
+      margin-bottom: 0.25rem;
+    }
+
+    .category-pill-hindi {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Toggle Row */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.875rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+    }
+
+    .toggle-row-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .toggle-row-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      position: sticky;
+      bottom: 0;
+      background: var(--bg);
+    }
+
+    .modal-btn {
+      height: 48px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+    }
+
+    .modal-btn.cancel {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      color: var(--fg);
+    }
+
+    .modal-btn.cancel:hover {
+      border-color: var(--terracotta);
+    }
+
+    .modal-btn.save {
+      background: var(--terracotta);
+      border: none;
+      color: white;
+    }
+
+    .modal-btn.save:hover {
+      background: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    /* Image Upload Section */
+    .image-upload-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .image-preview-box {
+      width: 120px;
+      height: 120px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-2xl);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .image-preview-box.has-image {
+      border-style: solid;
+      border-color: var(--terracotta);
+    }
+
+    .image-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .image-preview.visible {
+      display: block;
+    }
+
+    .image-placeholder {
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .image-placeholder-icon {
+      font-size: 32px;
+      margin-bottom: 0.25rem;
+    }
+
+    .image-placeholder-text {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .image-upload-actions {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .upload-btn {
+      width: 100%;
+      height: 44px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .upload-btn:hover {
+      border-color: var(--terracotta);
+      background: rgba(194, 65, 12, 0.05);
+    }
+
+    .upload-btn.remove {
+      border-color: #fecaca;
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .upload-btn.remove:hover {
+      background: #fecaca;
+    }
+
+    .upload-help-text {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .file-input-hidden {
+      display: none;
+    }
+
+    /* Category Image Display */
+    .category-image-display {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+    }
+
+    .category-image-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--saffron), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .category-image-info {
+      flex: 1;
+    }
+
+    .category-image-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .category-image-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 0.125rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header data-od-id="header">
+    <div class="header-left">
+      <div class="logo">Alpahaar Foods</div>
+      <div class="subtitle">Maa Ke Haath Ka Swaad</div>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" aria-label="Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 6v6m8.66-13l-5.2 3m-2.92 1.68l-5.2 3M23 12h-6m-6 0H5m13.66 8l-5.2-3m-2.92-1.68l-5.2-3"/>
+        </svg>
+      </button>
+      <div class="avatar">A</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Tab 1: Menu Builder -->
+    <div class="tab-content active" data-tab="menu-builder">
+
+    <!-- Greeting -->
+    <section class="greeting" data-od-id="greeting">
+      <div class="greeting-header">
+        <h1 class="greeting-title">Namaste Auntyji! 🙏</h1>
+        <div class="batch-badge">Batch #48</div>
+      </div>
+    </section>
+
+    <!-- Logistics -->
+    <div class="card" data-od-id="logistics-card">
+      <h2 class="card-title">This Weekend's Details</h2>
+      <div class="logistics-grid">
+        <div class="logistics-item">
+          <div class="logistics-icon">📅</div>
+          <div class="logistics-content">
+            <div class="logistics-label">Batch Date</div>
+            <div class="logistics-value">Sunday, October 13, 2026</div>
+            <div class="logistics-hindi">रविवार, 13 अक्टूबर</div>
+          </div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon">🚚</div>
+          <div class="logistics-content">
+            <div class="logistics-label">Drop Time</div>
+            <div class="logistics-value">6:00 PM</div>
+            <div class="logistics-hindi">शाम 6 बजे</div>
+          </div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon">⏰</div>
+          <div class="logistics-content">
+            <div class="logistics-label">Pre-order Cutoff</div>
+            <div class="logistics-value">Sunday 11:00 AM</div>
+            <div class="logistics-hindi">रविवार सुबह 11 बजे तक</div>
+          </div>
+        </div>
+        <div class="logistics-item">
+          <div class="logistics-icon">📍</div>
+          <div class="logistics-content">
+            <div class="logistics-label">Pickup Location</div>
+            <div class="logistics-value">Flat E401, Rainbow Apartments</div>
+            <div class="logistics-hindi">फ्लैट E401, रेनबो अपार्टमेंट्स</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Snacks Section -->
+    <div class="card" data-od-id="snacks-section">
+      <h2 class="card-title">🥟 Fresh Snacks
+        <div class="card-subtitle">ताज़ा नाश्ता</div>
+      </h2>
+      <div class="snack-list">
+        <div class="snack-item selected" data-snack="samosa">
+          <div class="checkbox">
+            <span class="checkmark">✓</span>
+          </div>
+          <div class="snack-content">
+            <div class="snack-name">Crispy Samosa</div>
+            <div class="snack-name-hindi">कुरकुरा समोसा</div>
+          </div>
+          <div class="snack-price">₹25/pc</div>
+          <div class="party-offer-badge">PARTY ₹23</div>
+        </div>
+        <div class="snack-item" data-snack="bonda">
+          <div class="checkbox">
+            <span class="checkmark">✓</span>
+          </div>
+          <div class="snack-content">
+            <div class="snack-name">Aloo Bonda</div>
+            <div class="snack-name-hindi">आलू बोंडा</div>
+          </div>
+          <div class="snack-price">₹25/pc</div>
+        </div>
+        <div class="snack-item selected" data-snack="pakoda">
+          <div class="checkbox">
+            <span class="checkmark">✓</span>
+          </div>
+          <div class="snack-content">
+            <div class="snack-name">Bread Pakoda</div>
+            <div class="snack-name-hindi">ब्रेड पकोड़ा</div>
+          </div>
+          <div class="snack-price">₹35/pc</div>
+        </div>
+        <div class="snack-item" data-snack="cutlet">
+          <div class="checkbox">
+            <span class="checkmark">✓</span>
+          </div>
+          <div class="snack-content">
+            <div class="snack-name">Veg Cutlet</div>
+            <div class="snack-name-hindi">वेज कटलेट</div>
+          </div>
+          <div class="snack-price">₹30/pc</div>
+        </div>
+      </div>
+      <div class="snack-price-note" style="margin-top: 0.75rem; text-align: center;">
+        Party offer: ₹23/pc for 14+ samosas
+      </div>
+    </div>
+
+    <!-- Mithai & Namkeen Section -->
+    <div class="card" data-od-id="mithai-section">
+      <h2 class="card-title">🍬 Mithai & Namkeen
+        <div class="card-subtitle">मिठाई और नमकीन</div>
+      </h2>
+      <div class="mithai-list">
+        <div class="mithai-item">
+          <div>
+            <div class="mithai-name">Special Mixture Namkeen</div>
+            <div class="mithai-name-hindi">स्पेशल मिक्सचर नमकीन</div>
+          </div>
+          <div class="mithai-price">₹84/250g</div>
+        </div>
+        <div class="mithai-item">
+          <div>
+            <div class="mithai-name">Balushahi</div>
+            <div class="mithai-name-hindi">बालूशाही</div>
+          </div>
+          <div class="mithai-price">₹120/250g</div>
+        </div>
+        <div class="mithai-item">
+          <div>
+            <div class="mithai-name">Meethi Bundiya</div>
+            <div class="mithai-name-hindi">मीठी बूंदिया</div>
+          </div>
+          <div class="mithai-price">₹90/250g</div>
+        </div>
+      </div>
+      <button class="add-custom-btn">
+        <span style="font-size: 20px;">+</span>
+        <span>Add Custom Item</span>
+      </button>
+    </div>
+
+    <!-- Tone Selector -->
+    <div class="card" data-od-id="tone-selector">
+      <h2 class="card-title">💬 Message Tone
+        <div class="card-subtitle">संदेश का स्वर</div>
+      </h2>
+      <div class="tone-selector">
+        <div class="tone-option selected" data-tone="hinglish">
+          <div class="radio">
+            <div class="radio-dot"></div>
+          </div>
+          <div style="flex: 1;">
+            <div class="tone-label">Hinglish (Recommended)</div>
+            <div class="tone-label-note">Mix of Hindi & English</div>
+          </div>
+          <div class="recommended-badge">POPULAR</div>
+        </div>
+        <div class="tone-option" data-tone="english">
+          <div class="radio">
+            <div class="radio-dot"></div>
+          </div>
+          <div style="flex: 1;">
+            <div class="tone-label">Pure English</div>
+            <div class="tone-label-note">Full English message</div>
+          </div>
+        </div>
+        <div class="tone-option" data-tone="hindi">
+          <div class="radio">
+            <div class="radio-dot"></div>
+          </div>
+          <div style="flex: 1;">
+            <div class="tone-label">Shuddh Hindi</div>
+            <div class="tone-label-note">पूर्ण हिंदी संदेश</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice Preview Card -->
+    <div class="card" data-od-id="voice-preview">
+      <h2 class="card-title">🎙️ Voice Preview
+        <div class="card-subtitle">आवाज़ का पूर्वावलोकन</div>
+      </h2>
+      <div class="voice-player">
+        <div class="player-header">
+          <div class="player-info">
+            <button class="play-btn" aria-label="Play voice preview">▶</button>
+            <div class="voice-info">
+              <div class="voice-name">Kavita (Warm Indian Aunty)</div>
+              <div class="voice-duration">0:24 / 0:42</div>
+            </div>
+          </div>
+          <button class="speed-toggle">1.0×</button>
+        </div>
+        <div class="waveform">
+          <div class="waveform-progress"></div>
+        </div>
+      </div>
+      <div class="whatsapp-preview">
+        <div class="whatsapp-text">🙏 *Namaste!* ✨
+
+This weekend I'm making fresh *Samosas, Pakodas* & homestyle *Balushahi*! 🥟🍬
+
+*What's Available:*
+🔸 Crispy Samosa - ₹25/pc (Party: ₹23 for 14+)
+🔸 Bread Pakoda - ₹35/pc
+🔸 Balushahi - ₹120/250g
+
+📍 *Pickup:* Flat E401, Rainbow Apartments
+⏰ *When:* Sunday 6 PM
+💰 *Pay:* UPI 6362307567
+
+Order by Sunday 11 AM! Reply with your list 😊</div>
+        <div class="whatsapp-time">2:45 PM ✓✓</div>
+      </div>
+    </div>
+
+    </div>
+    <!-- End Tab 1: Menu Builder -->
+
+    <!-- Tab 2: Preview & Share -->
+    <div class="tab-content" data-tab="preview-share" data-od-id="preview-share-tab">
+
+      <div class="preview-header">
+        <h1 class="preview-title">Preview & Share 📱</h1>
+        <p class="preview-subtitle">पूर्वावलोकन और साझा करें</p>
+      </div>
+
+      <!-- Message Preview -->
+      <div class="message-preview-card">
+        <div class="message-preview-label">WhatsApp Message Preview</div>
+        <div class="whatsapp-bubble-large">
+          <div class="whatsapp-text">🙏 *Namaste!* ✨
+
+This weekend I'm making fresh *Samosas, Pakodas* & homestyle *Balushahi*! 🥟🍬
+
+*What's Available:*
+🔸 Crispy Samosa - ₹25/pc (Party: ₹23 for 14+)
+🔸 Bread Pakoda - ₹35/pc
+🔸 Balushahi - ₹120/250g
+
+📍 *Pickup:* Flat E401, Rainbow Apartments
+⏰ *When:* Sunday 6 PM
+💰 *Pay:* UPI 6362307567
+
+Order by Sunday 11 AM! Reply with your list 😊</div>
+          <div class="whatsapp-time">2:45 PM ✓✓</div>
+        </div>
+        <div class="action-grid">
+          <button class="action-btn">
+            <span>✏️</span>
+            <span>Edit</span>
+          </button>
+          <button class="action-btn primary">
+            <span>📋</span>
+            <span>Copy Text</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-card">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Items</div>
+            <div class="stat-label-hindi">वस्तुएं</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">48</div>
+            <div class="stat-label">Batch #</div>
+            <div class="stat-label-hindi">बैच</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">0:42</div>
+            <div class="stat-label">Voice</div>
+            <div class="stat-label-hindi">आवाज़</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Options -->
+      <div class="share-card">
+        <h2 class="share-title">📤 Share via
+          <div class="share-subtitle">साझा करें</div>
+        </h2>
+        <div class="share-options">
+          <div class="share-option" data-share="whatsapp">
+            <div class="share-icon whatsapp">💬</div>
+            <div class="share-content">
+              <div class="share-name">WhatsApp Broadcast</div>
+              <div class="share-description">Share to multiple contacts</div>
+            </div>
+            <div class="share-arrow">→</div>
+          </div>
+          <div class="share-option" data-share="whatsapp-group">
+            <div class="share-icon whatsapp">👥</div>
+            <div class="share-content">
+              <div class="share-name">WhatsApp Groups</div>
+              <div class="share-description">Post to your groups</div>
+            </div>
+            <div class="share-arrow">→</div>
+          </div>
+          <div class="share-option" data-share="telegram">
+            <div class="share-icon telegram">✈️</div>
+            <div class="share-content">
+              <div class="share-name">Telegram Channel</div>
+              <div class="share-description">Post to Telegram</div>
+            </div>
+            <div class="share-arrow">→</div>
+          </div>
+          <div class="share-option" data-share="sms">
+            <div class="share-icon sms">📨</div>
+            <div class="share-content">
+              <div class="share-name">SMS Blast</div>
+              <div class="share-description">Send via text messages</div>
+            </div>
+            <div class="share-arrow">→</div>
+          </div>
+          <div class="share-option" data-share="clipboard">
+            <div class="share-icon clipboard">📋</div>
+            <div class="share-content">
+              <div class="share-name">Copy to Clipboard</div>
+              <div class="share-description">Paste anywhere</div>
+            </div>
+            <div class="share-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Broadcast History -->
+      <div class="card">
+        <h2 class="card-title">📜 Recent Broadcasts
+          <div class="card-subtitle">हाल की प्रसारण</div>
+        </h2>
+        <div class="history-list">
+          <div class="history-item">
+            <div class="history-date">
+              <div class="history-day">29</div>
+              <div class="history-month">SEP</div>
+            </div>
+            <div class="history-content">
+              <div class="history-batch">Batch #47</div>
+              <div class="history-meta">38 contacts • WhatsApp</div>
+            </div>
+            <div class="history-status sent">SENT</div>
+          </div>
+          <div class="history-item">
+            <div class="history-date">
+              <div class="history-day">22</div>
+              <div class="history-month">SEP</div>
+            </div>
+            <div class="history-content">
+              <div class="history-batch">Batch #46</div>
+              <div class="history-meta">42 contacts • WhatsApp</div>
+            </div>
+            <div class="history-status sent">SENT</div>
+          </div>
+          <div class="history-item">
+            <div class="history-date">
+              <div class="history-day">15</div>
+              <div class="history-month">SEP</div>
+            </div>
+            <div class="history-content">
+              <div class="history-batch">Batch #45</div>
+              <div class="history-meta">35 contacts • WhatsApp</div>
+            </div>
+            <div class="history-status sent">SENT</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- End Tab 2: Preview & Share -->
+
+    <!-- Tab 3: Saved Prices -->
+    <div class="tab-content" data-tab="prices" data-od-id="prices-tab">
+
+      <div class="prices-header">
+        <div class="status-badges">
+          <div class="status-badge master-list">
+            <span>📖</span>
+            <span>मास्टर रेट लिस्ट</span>
+          </div>
+          <div class="status-badge synced">
+            <span>✔</span>
+            <span>Auto-synced</span>
+          </div>
+        </div>
+        <h1 class="prices-title">Saved Prices & Dishes</h1>
+        <p class="prices-subtitle">रेट लिस्ट व डिशेज • घर का शुद्ध स्वाद</p>
+        <p class="prices-description">All your regular snacks, sweets & namkeen saved in one place. Add new items or edit rates anytime for weekend orders.</p>
+      </div>
+
+      <!-- KPI Summary -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-value">8</div>
+          <div class="kpi-label">Total Dishes</div>
+          <div class="kpi-label-hindi">कुल आइटम</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value">3</div>
+          <div class="kpi-label">Categories</div>
+          <div class="kpi-label-hindi">श्रेणियां</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value">⏰</div>
+          <div class="kpi-label">Yesterday</div>
+          <div class="kpi-label-hindi">अपडेटेड</div>
+        </div>
+      </div>
+
+      <!-- Add New Button -->
+      <button class="add-new-btn">
+        <span>➕</span>
+        <span>Add New Dish or Item (नया आइटम जोड़ें)</span>
+      </button>
+
+      <!-- Filter Pills -->
+      <div class="filter-pills">
+        <div class="filter-pill active" data-filter="all">All Items (8)</div>
+        <div class="filter-pill" data-filter="hot-snacks">Hot Snacks (ताज़ा नाश्ता)</div>
+        <div class="filter-pill" data-filter="mithai">Mithai / Sweets (मिठाई)</div>
+        <div class="filter-pill" data-filter="namkeen">Namkeen (नमकीन)</div>
+      </div>
+
+      <!-- Dish Cards List -->
+      <div class="dish-list">
+
+        <!-- 1. Crispy Samosa -->
+        <div class="dish-card" data-category="hot-snacks">
+          <div class="dish-header">
+            <div class="dish-image">🥟</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge hot-snack">Hot Snack</div>
+                <div class="active-indicator">
+                  <div class="active-dot"></div>
+                  <span>Active in Menu</span>
+                </div>
+              </div>
+              <div class="dish-title">Crispy Samosa</div>
+              <div class="dish-subtitle">गरम समोसा • आलू व काजू भरावन</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch on" data-dish="samosa">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Standard Rate:</div>
+              <div class="pricing-value">₹25 / piece</div>
+            </div>
+            <div class="party-offer-box">
+              <span>📢</span>
+              <span class="party-offer-text">Party Offer: ₹23/pc for 14+ pcs (Order 2 days before)</span>
+            </div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Aloo Bonda -->
+        <div class="dish-card" data-category="hot-snacks">
+          <div class="dish-header">
+            <div class="dish-image">🥔</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge hot-snack">Hot Snack</div>
+                <div class="active-indicator">
+                  <div class="active-dot"></div>
+                  <span>Active in Menu</span>
+                </div>
+              </div>
+              <div class="dish-title">Aloo Bonda / Aloo Chops</div>
+              <div class="dish-subtitle">आलू बोंडा / आलू चॉप्स • कड़ी पत्ता व राई का तड़का</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch on" data-dish="bonda">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Unit Rate:</div>
+              <div class="pricing-value">₹25 / pc</div>
+            </div>
+            <div class="pricing-note">Min order 2 pcs (ताज़ा फ्राई)</div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Bread Pakoda -->
+        <div class="dish-card" data-category="hot-snacks">
+          <div class="dish-header">
+            <div class="dish-image">🍞</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge hot-snack">Hot Snack</div>
+                <div class="active-indicator">
+                  <div class="active-dot"></div>
+                  <span>Active in Menu</span>
+                </div>
+              </div>
+              <div class="dish-title">Bread Pakoda (Paneer Stuffed)</div>
+              <div class="dish-subtitle">पनीर भरा ब्रेड पकोड़ा • स्पेशल मसाला</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch on" data-dish="pakoda">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Unit Rate:</div>
+              <div class="pricing-value">₹35 / pc</div>
+            </div>
+            <div class="pricing-note">Full triangle paneer slice included</div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Veg Cutlet (Paused/Inactive) -->
+        <div class="dish-card inactive" data-category="hot-snacks">
+          <div class="dish-header">
+            <div class="dish-image">🥗</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge paused">Paused / Inactive</div>
+                <div class="active-indicator inactive">
+                  <div class="active-dot"></div>
+                  <span>Hidden</span>
+                </div>
+              </div>
+              <div class="dish-title">Veg Cutlet</div>
+              <div class="dish-subtitle">वेज कटलेट्स • चुकंदर व मटर की पौष्टिकता</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch" data-dish="cutlet">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Rate:</div>
+              <div class="pricing-value">₹30 / piece</div>
+            </div>
+            <div class="pricing-note">Switch on to show in weekend menu / Not Visible</div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Special Mixture Namkeen -->
+        <div class="dish-card" data-category="namkeen">
+          <div class="dish-header">
+            <div class="dish-image">🥜</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge namkeen">Namkeen / Dry</div>
+                <div class="active-indicator">
+                  <div class="active-dot"></div>
+                  <span>Active in Menu</span>
+                </div>
+              </div>
+              <div class="dish-title">Special Mixture Namkeen</div>
+              <div class="dish-subtitle">स्पेशल मिक्सचर नमकीन • कुरकुरा और मसालेदार</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch on" data-dish="namkeen">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Packet Pricing:</div>
+              <div class="pricing-value">₹84 / 250g</div>
+            </div>
+            <div class="pricing-row">
+              <div class="pricing-label">Bulk 1kg Jar:</div>
+              <div class="pricing-value">₹320</div>
+            </div>
+            <div class="pricing-note">Airtight sealed jar</div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Melt-in-Mouth Balushahi -->
+        <div class="dish-card" data-category="mithai">
+          <div class="dish-header">
+            <div class="dish-image">🍪</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge mithai">Mithai / Sweet</div>
+                <div class="active-indicator">
+                  <div class="active-dot"></div>
+                  <span>Active in Menu</span>
+                </div>
+              </div>
+              <div class="dish-title">Melt-in-Mouth Balushahi</div>
+              <div class="dish-subtitle">बालूशाही • शुद्ध देशी घी व पिस्ता गार्निश</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch on" data-dish="balushahi">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Box Rate:</div>
+              <div class="pricing-value">₹120 / 250g</div>
+            </div>
+            <div class="pricing-note">Approx 5-6 pcs • Freshly prepared on Saturday batch</div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. Meethi Bundiya -->
+        <div class="dish-card" data-category="mithai">
+          <div class="dish-header">
+            <div class="dish-image">🧈</div>
+            <div class="dish-header-content">
+              <div class="dish-meta-row">
+                <div class="category-badge mithai">Mithai / Sweet</div>
+                <div class="active-indicator">
+                  <div class="active-dot"></div>
+                  <span>Active in Menu</span>
+                </div>
+              </div>
+              <div class="dish-title">Meethi Bundiya</div>
+              <div class="dish-subtitle">मीठी बुंदिया • इलायची व केसर की महक</div>
+            </div>
+            <div class="dish-toggle">
+              <div class="toggle-switch on" data-dish="bundiya">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-box">
+            <div class="pricing-row">
+              <div class="pricing-label">Pack Rate:</div>
+              <div class="pricing-value">₹90 / 250g</div>
+            </div>
+            <div class="pricing-note">Fresh Desi Ghee preparation</div>
+          </div>
+          <div class="dish-actions">
+            <button class="dish-action-btn edit">
+              <span>✏️</span>
+              <span>Edit (बदलें)</span>
+            </button>
+            <button class="dish-action-btn delete">
+              <span>🗑️</span>
+              <span>Delete (हटाएं)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Auntyji's Kitchen Tip -->
+      <div class="tip-card">
+        <div class="tip-header">
+          <div class="tip-icon">💡</div>
+          <div class="tip-title">Auntyji's Kitchen Tip (सुझाव):</div>
+        </div>
+        <div class="tip-text">
+          Rates updated here reflect instantly in your weekly Menu Builder and WhatsApp broadcast preview. Keep party discounts transparent so customers can plan weekend family gatherings easily!
+        </div>
+      </div>
+
+    </div>
+    <!-- End Tab 3: Saved Prices -->
+
+    <!-- Tab 4: Settings -->
+    <div class="tab-content" data-tab="settings" data-od-id="settings-tab">
+
+      <!-- Settings Banner -->
+      <div class="settings-banner">
+        <div class="settings-icon-circle">⚙️</div>
+        <div class="settings-banner-content">
+          <div class="settings-banner-header">
+            <h1 class="settings-banner-title">AI & Voice Settings</h1>
+            <div class="settings-badge">सेटिंग्स</div>
+          </div>
+          <p class="settings-banner-desc">Set up smart writing and warm voice narration so Auntyji can easily create WhatsApp broadcasts and listen with a single tap.</p>
+          <p class="settings-banner-hindi">आसान सेटिंग्स: एक क्लिक में संदेश लिखें और आवाज में सुनें</p>
+        </div>
+      </div>
+
+      <!-- Voice Read-Out Section -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-icon">🔊</div>
+            <div class="section-title-group">
+              <div class="section-title">Voice Read-Out (आवाज)</div>
+              <div class="section-subtitle">ElevenLabs Text-to-Speech</div>
+            </div>
+          </div>
+          <div class="connected-badge success">
+            <span>•</span>
+            <span>Connected (कनेक्टेड)</span>
+          </div>
+        </div>
+
+        <!-- API Key Field -->
+        <div class="input-group">
+          <label class="input-label">ElevenLabs API Key • की (Secret)</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" value="sk_1234567890abcdefghijklmnopqrs" data-input="elevenlabs-key">
+            <button class="eye-toggle" data-toggle="elevenlabs-key">👁️</button>
+          </div>
+        </div>
+
+        <!-- Voice Persona Selector -->
+        <div class="voice-option-header">Choose Narration Voice • आवाज चुनें</div>
+        <div class="voice-options">
+          <div class="voice-option selected" data-voice="kavita">
+            <div class="voice-radio">
+              <div class="voice-radio-dot"></div>
+            </div>
+            <div class="voice-content">
+              <div class="voice-name-row">
+                <div class="voice-name">Kavita (कविता)</div>
+                <div class="voice-recommended">Recommended</div>
+              </div>
+              <div class="voice-desc">Warm Indian Homemaker • Hindi & Hinglish friendly</div>
+            </div>
+            <div class="voice-icon">🎵</div>
+          </div>
+          <div class="voice-option" data-voice="sunita">
+            <div class="voice-radio">
+              <div class="voice-radio-dot"></div>
+            </div>
+            <div class="voice-content">
+              <div class="voice-name">Sunita (सुनीता)</div>
+              <div class="voice-desc">Energetic, friendly neighborhood aunty tone</div>
+            </div>
+            <div class="voice-icon">🔈</div>
+          </div>
+          <div class="voice-option" data-voice="maa">
+            <div class="voice-radio">
+              <div class="voice-radio-dot"></div>
+            </div>
+            <div class="voice-content">
+              <div class="voice-name-row">
+                <div class="voice-name">Maa's Real Voice Clone</div>
+                <div class="voice-special-badge">माँ की आवाज</div>
+              </div>
+              <div class="voice-desc">Authentic AI clone recorded from 2-minute voice sample</div>
+            </div>
+            <div class="voice-icon">🎤</div>
+          </div>
+        </div>
+
+        <!-- Sample Preview -->
+        <div class="sample-preview">
+          <div class="sample-preview-header">
+            <div class="sample-preview-title">Sample Preview (सुनकर देखें):</div>
+            <div class="ready-status">Ready</div>
+          </div>
+          <button class="test-button">
+            <span>▶</span>
+            <span>Test Read-out (आवाज सुनें)</span>
+          </button>
+          <div class="sample-quote">नमस्ते जी! इस शनिवार ताज़ा मेथी मठरी और बेसन के लड्डू तैयार हैं...</div>
+        </div>
+
+        <!-- Speaking Speed Slider -->
+        <div class="speed-slider-group">
+          <div class="speed-header">
+            <div class="speed-label">Speaking Speed (बोलने की रफ़्तार)</div>
+            <div class="speed-value">1.0x (Normal)</div>
+          </div>
+          <div class="slider-container">
+            <input type="range" class="slider" min="75" max="125" value="100" step="25" data-slider="speed">
+          </div>
+          <div class="speed-markers">
+            <div class="speed-marker">0.75x<br>Slow for Elders<br>साफ आवाज</div>
+            <div class="speed-marker">1.0x<br>Standard</div>
+            <div class="speed-marker">1.25x<br>Fast</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Message Writer Section -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-icon">🤖</div>
+            <div class="section-title-group">
+              <div class="section-title">AI Message Writer (मैसेज मॉडल)</div>
+              <div class="section-subtitle">WhatsApp Broadcast Generation</div>
+            </div>
+          </div>
+          <div class="connected-badge ready">
+            <span>•</span>
+            <span>Ready</span>
+          </div>
+        </div>
+
+        <!-- Model Provider Cards -->
+        <div class="model-providers">
+          <div class="model-card selected" data-model="openai">
+            <div class="model-icon">✨</div>
+            <div class="model-content">
+              <div class="model-name">OpenAI (GPT-4o / GPT-4o-mini)</div>
+              <div class="model-desc">Best Indian recipe & Hinglish phrasing</div>
+            </div>
+            <div class="model-checkmark">✓</div>
+          </div>
+          <div class="model-card" data-model="claude">
+            <div class="model-icon">🧠</div>
+            <div class="model-content">
+              <div class="model-name">Anthropic Claude (Claude 3.5 Sonnet)</div>
+              <div class="model-desc">Very polite, warm conversational nuances</div>
+            </div>
+          </div>
+          <div class="model-card" data-model="gemini">
+            <div class="model-icon">💎</div>
+            <div class="model-content">
+              <div class="model-name">Google Gemini (Gemini 2.0 Flash / Pro)</div>
+              <div class="model-desc">Fast & multilingual • Great for Indian languages</div>
+            </div>
+          </div>
+          <div class="model-card" data-model="ollama">
+            <div class="model-icon">🏠</div>
+            <div class="model-content">
+              <div class="model-name">Ollama Local Server (Llama 3 / Mistral)</div>
+              <div class="model-desc">100% Free • Society Home Server</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OpenAI API Key -->
+        <div class="input-group api-key-group" data-api="openai">
+          <label class="input-label">OpenAI API Key</label>
+          <div class="input-wrapper">
+            <div class="validated-status">
+              <span>✔</span>
+              <span>Validated & Saved</span>
+            </div>
+            <input type="password" class="input-field" value="sk_abcdefghijklmnopqrstuvwxyz123456" data-input="openai-key">
+            <button class="eye-toggle" data-toggle="openai-key">👁️</button>
+          </div>
+        </div>
+
+        <!-- Claude API Key -->
+        <div class="input-group api-key-group" data-api="claude" style="display: none;">
+          <label class="input-label">Anthropic Claude API Key</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" placeholder="sk-ant-..." data-input="claude-key">
+            <button class="eye-toggle" data-toggle="claude-key">👁️</button>
+          </div>
+        </div>
+
+        <!-- Gemini API Key -->
+        <div class="input-group api-key-group" data-api="gemini" style="display: none;">
+          <label class="input-label">Google Gemini API Key</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" placeholder="AIza..." data-input="gemini-key">
+            <button class="eye-toggle" data-toggle="gemini-key">👁️</button>
+          </div>
+        </div>
+
+        <!-- Ollama Server URL -->
+        <div class="input-group api-key-group" data-api="ollama" style="display: none;">
+          <label class="input-label">Ollama Server URL • लोकल सर्वर पता</label>
+          <div class="input-wrapper">
+            <input type="text" class="input-field" value="http://192.168.1.100:11434" placeholder="http://localhost:11434">
+          </div>
+        </div>
+
+        <!-- Tone Dropdown -->
+        <div class="input-group">
+          <label class="input-label">Default WhatsApp Tone & Style • बात करने का अंदाज</label>
+          <select class="select-field">
+            <option selected>Warm Hinglish Society Aunty (माँ जैसा अपनापन - 'नमस्ते जी!')</option>
+            <option>Pure English Professional</option>
+            <option>Shuddh Hindi Traditional</option>
+            <option>Young & Friendly Modern</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Kitchen & UPI Details Section -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-icon">🏪</div>
+            <div class="section-title-group">
+              <div class="section-title">Kitchen & UPI Details</div>
+              <div class="section-subtitle">डिफ़ॉल्ट पता और पेमेंट नंबर</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- UPI Mobile -->
+        <div class="input-group">
+          <label class="input-label">Google Pay / PhonePe UPI Mobile • यूपीआई नंबर</label>
+          <div class="input-wrapper">
+            <input type="tel" class="input-field" value="6362307567" placeholder="Enter UPI number">
+          </div>
+        </div>
+
+        <!-- Society Group Name -->
+        <div class="input-group">
+          <label class="input-label">Society WhatsApp Group Name • ग्रुप का नाम</label>
+          <div class="input-wrapper">
+            <input type="text" class="input-field" value="GR Lavender Foodies Club" placeholder="Enter group name">
+          </div>
+        </div>
+
+        <!-- Pickup Address -->
+        <div class="input-group">
+          <label class="input-label">Pickup Flat / Kitchen Counter • पिकअप का पता</label>
+          <div class="input-wrapper">
+            <input type="text" class="input-field" value="Flat E401, GR Lavender Apartments" placeholder="Enter pickup address">
+          </div>
+        </div>
+      </div>
+
+      <!-- Save Button -->
+      <button class="save-button">
+        <span>💾</span>
+        <span>Save Settings & Test (सेव करें)</span>
+      </button>
+
+      <!-- Security Note -->
+      <div class="security-note">
+        <div class="security-icon">🔒</div>
+        <div class="security-text">
+          <strong>100% Secure & Private:</strong> All API keys remain encrypted strictly on this phone. They are never sent to third-party tracking servers or shared outside Alpahaar Foods.
+        </div>
+      </div>
+
+    </div>
+    <!-- End Tab 4: Settings -->
+
+  </main>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <button class="cta-btn">
+      <span>✨</span>
+      <span>Generate WhatsApp Message</span>
+    </button>
+  </div>
+
+  <!-- Add New Dish Modal -->
+  <div class="modal-overlay" id="add-dish-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title">Add New Dish or Item</div>
+          <div class="modal-subtitle">नया आइटम जोड़ें</div>
+        </div>
+        <button class="modal-close" data-close-modal>✕</button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Dish Name Section -->
+        <div class="form-section">
+          <div class="form-section-title">🍽️ Dish Name • डिश का नाम</div>
+          <div class="input-group">
+            <label class="input-label">English Name</label>
+            <input type="text" class="input-field" placeholder="e.g., Crispy Samosa" id="dish-name-en">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Hindi Name • हिंदी नाम</label>
+            <input type="text" class="input-field" placeholder="e.g., कुरकुरा समोसा" id="dish-name-hi">
+          </div>
+        </div>
+
+        <!-- Category Section -->
+        <div class="form-section">
+          <div class="form-section-title">📂 Category • श्रेणी</div>
+          <div class="category-pills">
+            <div class="category-pill selected" data-category="hot-snacks" data-emoji="🥟">
+              <div class="category-pill-name">Hot Snacks</div>
+              <div class="category-pill-hindi">ताज़ा नाश्ता</div>
+            </div>
+            <div class="category-pill" data-category="namkeen" data-emoji="🥜">
+              <div class="category-pill-name">Namkeen</div>
+              <div class="category-pill-hindi">नमकीन</div>
+            </div>
+            <div class="category-pill" data-category="mithai" data-emoji="🍪">
+              <div class="category-pill-name">Mithai</div>
+              <div class="category-pill-hindi">मिठाई</div>
+            </div>
+          </div>
+
+          <!-- Category Image Display -->
+          <div class="category-image-display">
+            <div class="category-image-icon" id="category-icon-display">🥟</div>
+            <div class="category-image-info">
+              <div class="category-image-name" id="category-name-display">Hot Snacks</div>
+              <div class="category-image-desc" id="category-desc-display">ताज़ा नाश्ता</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="form-section">
+          <div class="form-section-title">📷 Dish Photo • डिश की तस्वीर</div>
+          <div class="image-upload-container">
+            <div class="image-preview-box" id="image-preview-box">
+              <img src="" alt="Dish preview" class="image-preview" id="image-preview">
+              <div class="image-placeholder" id="image-placeholder">
+                <div class="image-placeholder-icon">📸</div>
+                <div class="image-placeholder-text">No Image</div>
+              </div>
+            </div>
+            <div class="image-upload-actions">
+              <button type="button" class="upload-btn" id="upload-image-btn">
+                <span>📤</span>
+                <span>Upload Photo</span>
+              </button>
+              <button type="button" class="upload-btn remove" id="remove-image-btn" style="display: none;">
+                <span>🗑️</span>
+                <span>Remove Photo</span>
+              </button>
+              <div class="upload-help-text">JPG, PNG up to 5MB • Recommended 400×400px</div>
+            </div>
+          </div>
+          <input type="file" class="file-input-hidden" id="dish-image-input" accept="image/jpeg,image/png,image/jpg">
+        </div>
+
+        <!-- Description Section -->
+        <div class="form-section">
+          <div class="form-section-title">📝 Description • विवरण</div>
+          <div class="input-group">
+            <label class="input-label">English Description</label>
+            <input type="text" class="input-field" placeholder="e.g., आलू व काजू भरावन" id="dish-desc-en">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Hindi Description • हिंदी विवरण</label>
+            <input type="text" class="input-field" placeholder="e.g., आलू व काजू भरावन" id="dish-desc-hi">
+          </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="form-section">
+          <div class="form-section-title">💰 Pricing • दाम</div>
+          <div class="form-row">
+            <div class="input-group">
+              <label class="input-label">Price • दाम (₹)</label>
+              <input type="number" class="input-field" placeholder="25" id="dish-price">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Unit • इकाई</label>
+              <select class="select-field" id="dish-unit">
+                <option value="piece">per piece</option>
+                <option value="250g">per 250g</option>
+                <option value="500g">per 500g</option>
+                <option value="1kg">per 1kg</option>
+                <option value="box">per box</option>
+                <option value="pack">per pack</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Party Offer Section -->
+        <div class="form-section">
+          <div class="form-section-title">🎉 Party Offer (Optional) • पार्टी ऑफर</div>
+          <div class="form-row">
+            <div class="input-group">
+              <label class="input-label">Party Price (₹)</label>
+              <input type="number" class="input-field" placeholder="23" id="party-price">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Min Quantity</label>
+              <input type="number" class="input-field" placeholder="14" id="party-min-qty">
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Notes -->
+        <div class="form-section">
+          <div class="form-section-title">📌 Additional Notes • अतिरिक्त नोट्स</div>
+          <div class="input-group">
+            <label class="input-label">Special Notes (Optional)</label>
+            <input type="text" class="input-field" placeholder="e.g., Min order 2 pcs, Freshly prepared" id="dish-notes">
+          </div>
+        </div>
+
+        <!-- Active Status Toggle -->
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-label">Active in Menu</div>
+            <div class="toggle-row-desc">Show this item in weekend menu</div>
+          </div>
+          <div class="toggle-switch on" id="dish-active-toggle">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-btn cancel" data-close-modal>
+          <span>Cancel</span>
+        </button>
+        <button class="modal-btn save" id="save-dish-btn">
+          <span>💾</span>
+          <span>Save Dish</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" data-od-id="bottom-nav">
+    <button class="nav-item active" data-nav-tab="menu-builder">
+      <div class="nav-icon">📝</div>
+      <div class="nav-label">Menu Builder</div>
+    </button>
+    <button class="nav-item" data-nav-tab="preview-share">
+      <div class="nav-icon">👁️</div>
+      <div class="nav-label">Preview</div>
+    </button>
+    <button class="nav-item" data-nav-tab="prices">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Prices</div>
+    </button>
+    <button class="nav-item" data-nav-tab="settings">
+      <div class="nav-icon">⚙️</div>
+      <div class="nav-label">Settings</div>
+    </button>
+  </nav>
+
+  <script>
+    // Snack item toggles
+    document.querySelectorAll('.snack-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('selected');
+      });
+    });
+
+    // Tone selector
+    document.querySelectorAll('.tone-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.tone-option').forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+      });
+    });
+
+    // Voice player
+    const playBtn = document.querySelector('.play-btn');
+    const waveformProgress = document.querySelector('.waveform-progress');
+    let isPlaying = false;
+    let progress = 57;
+
+    playBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      playBtn.textContent = isPlaying ? '⏸' : '▶';
+
+      if (isPlaying) {
+        const interval = setInterval(() => {
+          progress += 2;
+          waveformProgress.style.width = `${progress}%`;
+
+          if (progress >= 100) {
+            progress = 0;
+            isPlaying = false;
+            playBtn.textContent = '▶';
+            clearInterval(interval);
+          }
+        }, 200);
+      }
+    });
+
+    // Speed toggle
+    const speedToggle = document.querySelector('.speed-toggle');
+    const speeds = ['1.0×', '1.25×', '1.5×', '2.0×'];
+    let currentSpeed = 0;
+
+    speedToggle.addEventListener('click', () => {
+      currentSpeed = (currentSpeed + 1) % speeds.length;
+      speedToggle.textContent = speeds[currentSpeed];
+    });
+
+    // Bottom nav tabs and tab switching
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const targetTab = item.getAttribute('data-nav-tab');
+
+        // Update nav active state
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        // Show corresponding tab content
+        document.querySelectorAll('.tab-content').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        const targetContent = document.querySelector(`.tab-content[data-tab="${targetTab}"]`);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // CTA button - switches to Preview tab
+    document.querySelector('.cta-btn').addEventListener('click', () => {
+      // Switch to preview tab
+      const previewNavItem = document.querySelector('.nav-item[data-nav-tab="preview-share"]');
+      if (previewNavItem) {
+        previewNavItem.click();
+      }
+    });
+
+    // Filter pills
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const filter = pill.getAttribute('data-filter');
+
+        // Update active pill
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        // Filter dish cards
+        document.querySelectorAll('.dish-card').forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Toggle switches
+    document.querySelectorAll('.toggle-switch').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggle.classList.toggle('on');
+
+        // Update card inactive state
+        const card = toggle.closest('.dish-card');
+        const activeIndicator = card.querySelector('.active-indicator');
+        const categoryBadge = card.querySelector('.category-badge');
+
+        if (toggle.classList.contains('on')) {
+          card.classList.remove('inactive');
+          activeIndicator.classList.remove('inactive');
+          activeIndicator.querySelector('span').textContent = 'Active in Menu';
+          if (categoryBadge.classList.contains('paused')) {
+            categoryBadge.textContent = card.querySelector('.dish-title').textContent.includes('Cutlet') ? 'Hot Snack' : 'Hot Snack';
+            categoryBadge.classList.remove('paused');
+            categoryBadge.classList.add('hot-snack');
+          }
+        } else {
+          card.classList.add('inactive');
+          activeIndicator.classList.add('inactive');
+          activeIndicator.querySelector('span').textContent = 'Hidden';
+        }
+      });
+    });
+
+    // Dish action buttons
+    document.querySelectorAll('.dish-action-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isEdit = btn.classList.contains('edit');
+        const dishTitle = btn.closest('.dish-card').querySelector('.dish-title').textContent;
+
+        if (isEdit) {
+          alert(`Editing ${dishTitle}... (Edit modal would open here)`);
+        } else {
+          if (confirm(`Delete ${dishTitle}? This action cannot be undone.`)) {
+            btn.closest('.dish-card').style.opacity = '0';
+            setTimeout(() => {
+              btn.closest('.dish-card').remove();
+              // Update count
+              const totalDishes = document.querySelectorAll('.dish-card').length;
+              const kpiValue = document.querySelector('.kpi-value');
+              if (kpiValue && kpiValue.textContent === '8') {
+                kpiValue.textContent = totalDishes;
+              }
+            }, 300);
+          }
+        }
+      });
+    });
+
+    // Add new dish button - Open modal
+    document.querySelector('.add-new-btn')?.addEventListener('click', () => {
+      document.getElementById('add-dish-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Modal close handlers
+    document.querySelectorAll('[data-close-modal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('add-dish-modal').classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Close modal on overlay click
+    document.getElementById('add-dish-modal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'add-dish-modal') {
+        document.getElementById('add-dish-modal').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Category pill selection in modal
+    document.querySelectorAll('.category-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+
+        // Update category image display
+        const emoji = pill.getAttribute('data-emoji');
+        const categoryName = pill.querySelector('.category-pill-name').textContent;
+        const categoryHindi = pill.querySelector('.category-pill-hindi').textContent;
+
+        document.getElementById('category-icon-display').textContent = emoji;
+        document.getElementById('category-name-display').textContent = categoryName;
+        document.getElementById('category-desc-display').textContent = categoryHindi;
+      });
+    });
+
+    // Dish active toggle in modal
+    document.getElementById('dish-active-toggle')?.addEventListener('click', function() {
+      this.classList.toggle('on');
+    });
+
+    // Image upload handling
+    document.getElementById('upload-image-btn')?.addEventListener('click', () => {
+      document.getElementById('dish-image-input').click();
+    });
+
+    document.getElementById('dish-image-input')?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Image size must be less than 5MB');
+          return;
+        }
+
+        // Validate file type
+        if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
+          alert('Only JPG and PNG images are allowed');
+          return;
+        }
+
+        // Read and preview the image
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const preview = document.getElementById('image-preview');
+          const previewBox = document.getElementById('image-preview-box');
+          const placeholder = document.getElementById('image-placeholder');
+          const removeBtn = document.getElementById('remove-image-btn');
+
+          preview.src = event.target.result;
+          preview.classList.add('visible');
+          placeholder.style.display = 'none';
+          previewBox.classList.add('has-image');
+          removeBtn.style.display = 'flex';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Remove image
+    document.getElementById('remove-image-btn')?.addEventListener('click', () => {
+      const preview = document.getElementById('image-preview');
+      const previewBox = document.getElementById('image-preview-box');
+      const placeholder = document.getElementById('image-placeholder');
+      const removeBtn = document.getElementById('remove-image-btn');
+      const fileInput = document.getElementById('dish-image-input');
+
+      preview.src = '';
+      preview.classList.remove('visible');
+      placeholder.style.display = 'block';
+      previewBox.classList.remove('has-image');
+      removeBtn.style.display = 'none';
+      fileInput.value = '';
+    });
+
+    // Save dish button
+    document.getElementById('save-dish-btn')?.addEventListener('click', () => {
+      // Gather form data
+      const dishData = {
+        nameEn: document.getElementById('dish-name-en').value,
+        nameHi: document.getElementById('dish-name-hi').value,
+        descEn: document.getElementById('dish-desc-en').value,
+        descHi: document.getElementById('dish-desc-hi').value,
+        category: document.querySelector('.category-pill.selected')?.getAttribute('data-category'),
+        categoryEmoji: document.querySelector('.category-pill.selected')?.getAttribute('data-emoji'),
+        price: document.getElementById('dish-price').value,
+        unit: document.getElementById('dish-unit').value,
+        partyPrice: document.getElementById('party-price').value,
+        partyMinQty: document.getElementById('party-min-qty').value,
+        notes: document.getElementById('dish-notes').value,
+        active: document.getElementById('dish-active-toggle').classList.contains('on'),
+        image: document.getElementById('image-preview').src
+      };
+
+      // Validate required fields
+      if (!dishData.nameEn || !dishData.price) {
+        alert('Please fill in at least the English name and price.');
+        return;
+      }
+
+      // Success feedback
+      const saveBtn = document.getElementById('save-dish-btn');
+      const originalHTML = saveBtn.innerHTML;
+      saveBtn.innerHTML = '<span>✓</span><span>Saved!</span>';
+      saveBtn.style.background = '#16a34a';
+
+      setTimeout(() => {
+        // Close modal
+        document.getElementById('add-dish-modal').classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Reset button
+        saveBtn.innerHTML = originalHTML;
+        saveBtn.style.background = '';
+
+        // Show success message
+        alert(`✓ ${dishData.nameEn} saved successfully! It will appear in your menu and can be edited from the Prices tab.`);
+
+        // Reset form
+        document.getElementById('dish-name-en').value = '';
+        document.getElementById('dish-name-hi').value = '';
+        document.getElementById('dish-desc-en').value = '';
+        document.getElementById('dish-desc-hi').value = '';
+        document.getElementById('dish-price').value = '';
+        document.getElementById('party-price').value = '';
+        document.getElementById('party-min-qty').value = '';
+        document.getElementById('dish-notes').value = '';
+
+        // Reset image
+        const preview = document.getElementById('image-preview');
+        const previewBox = document.getElementById('image-preview-box');
+        const placeholder = document.getElementById('image-placeholder');
+        const removeBtn = document.getElementById('remove-image-btn');
+        const fileInput = document.getElementById('dish-image-input');
+
+        preview.src = '';
+        preview.classList.remove('visible');
+        placeholder.style.display = 'block';
+        previewBox.classList.remove('has-image');
+        removeBtn.style.display = 'none';
+        fileInput.value = '';
+
+        // Reset category to default
+        document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('selected'));
+        document.querySelector('[data-category="hot-snacks"]').classList.add('selected');
+        document.getElementById('category-icon-display').textContent = '🥟';
+        document.getElementById('category-name-display').textContent = 'Hot Snacks';
+        document.getElementById('category-desc-display').textContent = 'ताज़ा नाश्ता';
+
+        // Optional: Add the new dish card to the list dynamically
+        console.log('Dish saved:', dishData);
+      }, 1500);
+    });
+
+    // Share option clicks
+    document.querySelectorAll('.share-option').forEach(option => {
+      option.addEventListener('click', () => {
+        const shareType = option.getAttribute('data-share');
+        const messages = {
+          'whatsapp': 'Opening WhatsApp Broadcast... 💬',
+          'whatsapp-group': 'Opening WhatsApp Groups... 👥',
+          'telegram': 'Opening Telegram... ✈️',
+          'sms': 'Opening SMS... 📨',
+          'clipboard': 'Message copied to clipboard! 📋'
+        };
+        alert(messages[shareType] || 'Sharing...');
+      });
+    });
+
+    // Copy text button
+    document.querySelectorAll('.action-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (btn.textContent.includes('Copy')) {
+          const messageText = document.querySelector('.whatsapp-bubble-large .whatsapp-text');
+          if (messageText) {
+            navigator.clipboard.writeText(messageText.textContent).then(() => {
+              const originalText = btn.innerHTML;
+              btn.innerHTML = '<span>✓</span><span>Copied!</span>';
+              setTimeout(() => {
+                btn.innerHTML = originalText;
+              }, 2000);
+            });
+          }
+        }
+      });
+    });
+
+    // Settings Tab - Eye toggles
+    document.querySelectorAll('.eye-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const inputName = toggle.getAttribute('data-toggle');
+        const input = document.querySelector(`[data-input="${inputName}"]`);
+        if (input) {
+          if (input.type === 'password') {
+            input.type = 'text';
+            toggle.textContent = '👁️‍🗨️';
+          } else {
+            input.type = 'password';
+            toggle.textContent = '👁️';
+          }
+        }
+      });
+    });
+
+    // Voice option selection
+    document.querySelectorAll('.voice-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.voice-option').forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+      });
+    });
+
+    // Test read-out button
+    document.querySelector('.test-button')?.addEventListener('click', () => {
+      const btn = document.querySelector('.test-button');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>⏸</span><span>Playing... (आवाज चल रही है)</span>';
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+      }, 3000);
+    });
+
+    // Speaking speed slider
+    const speedSlider = document.querySelector('[data-slider="speed"]');
+    const speedValue = document.querySelector('.speed-value');
+
+    if (speedSlider && speedValue) {
+      speedSlider.addEventListener('input', (e) => {
+        const value = e.target.value;
+        const speed = (value / 100).toFixed(2);
+        let label = 'Normal';
+        if (value === '75') label = 'Slow';
+        if (value === '125') label = 'Fast';
+        speedValue.textContent = `${speed}x (${label})`;
+      });
+    }
+
+    // Model provider selection
+    document.querySelectorAll('.model-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.model-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+
+        // Show/hide API key fields based on selection
+        const model = card.getAttribute('data-model');
+
+        // Hide all API key groups
+        document.querySelectorAll('.api-key-group').forEach(group => {
+          group.style.display = 'none';
+        });
+
+        // Show the selected one
+        const selectedGroup = document.querySelector(`.api-key-group[data-api="${model}"]`);
+        if (selectedGroup) {
+          selectedGroup.style.display = 'block';
+        }
+      });
+    });
+
+    // Save settings button
+    document.querySelector('.save-button')?.addEventListener('click', () => {
+      const btn = document.querySelector('.save-button');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>✓</span><span>Settings Saved! (सेटिंग्स सेव हो गईं)</span>';
+      btn.style.background = '#16a34a';
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+      }, 2500);
+    });
+  </script>
+
+</body>
+</html>

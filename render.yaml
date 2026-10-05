@@ -1,0 +1,53 @@
+# Render Blueprint – https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: alpahaar-menu-builder
+    runtime: node
+    plan: free
+    region: singapore          # closest to India
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      # Supabase (NEXT_PUBLIC_* are needed at BUILD time – set before first deploy)
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: ALLOWED_EMAILS
+        sync: false
+      # AI providers
+      - key: DEFAULT_AI_PROVIDER
+        value: gemini
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-5-5
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      # ElevenLabs
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: ELEVENLABS_MODEL_ID
+        value: eleven_v4
+      - key: ELEVENLABS_STYLE_TAG
+        value: "[warm]"
+      - key: ELEVENLABS_VOICE_KAVITA
+        value: iPmVSMDLX3FRQaONHDW2
+      - key: ELEVENLABS_VOICE_SUNITA
+        value: AiJ5mX6DkaITZYbWMUlR
+      - key: ELEVENLABS_VOICE_MAA
+        sync: false
